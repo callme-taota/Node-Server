@@ -47,6 +47,11 @@ if(flag){
     })
     app.use(express.static(rp))
     
+    app.get('/setjson',(req,res) => {
+        let data = JSON.parse(req.query.data)
+        //!!! TODO 
+        res.send("OK");
+    })
 
     for(let i = 0; i <API.length; i++) {
         let port = API[i].port;

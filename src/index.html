@@ -6,82 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>欢迎使用Node-Server</title>
     <script src="./vue.js"></script>
-    <style>
-        html , body{
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-        }
-        li{
-            list-style-type: none;
-        }
-        #app{
-            position: absolute;
-            width: 100%;
-            height: 100%; 
-            background-color: rgb(242, 242, 242);
-        }
-        #title{
-            margin: 0;
-            font-weight: bolder;
-            font-size: 36px;
-            margin-left: 4%;
-            position: relative;
-            color: #222;
-        }
-        #cont{
-            position: absolute;
-            width: 92%;
-            height: 90%;
-            left: 4%;
-            top: 5%;
-            border-radius: 80px;
-            display: flex;
-        }
-        #left{
-            flex: 1;
-        }
-        #right{
-            flex: 1;
-        }
-        .items{
-            background-color: rgb(250, 250, 250);
-            color: black;
-            margin-bottom: 8px;
-            height: 50px;
-            width: 90%;
-            margin-left: 5%;
-            border-radius: 8px;
-        }
-        .items:hover{
-            background-color: rgb(240, 240, 240);
-        }
-        #list{
-            width: 380px;
-            background-color: white;
-            height: 100%;
-            position: relative;
-            margin: 0;
-            padding: 0;
-            border-radius: 30px;
-            overflow-y:auto;
-
-        }
-        .ports{
-            line-height: 50px;
-            margin-left: 8px;
-        }
-    </style>
+    <link rel="stylesheet" href="./index.css">
 </head>
 <body>
     <div id="app">
-        <h2 id="title">欢迎使用Node-Server</h2>
+        <div class="header">
+            <h2 id="title">欢迎使用Node-Server</h2>
+            <button class="btn" v-on:click="add()">添加接口</button>
+            <button class="btn" v-on:click="delt()">删除接口</button>
+            <button class="btn" v-on:click="save()">确认保存</button>
+        </div>
         <div id="cont">
             <div id="left">
                 <ul id="list">
                     <li class="items" v-for="item in data" :key="item.id" :id="item.id" v-on:click="onSelect(item.id)">
+                        <span class="idx">{{item.id}}</span>
                         <span class="ports">{{item.port}}</span>
                         <!-- <span>{{item.sql}}</span>
                         <span>{{item.keyValue}}</span>
@@ -90,12 +29,24 @@
                 </ul>
             </div>
             <div id="right">
-                <p>接口ID：{{selected.id}}</p>
-                接口地址：<input type="text" v-model="selected.port"/>
-                <br>
-                接口sql：<textarea  v-model="selected.sql"></textarea>
-                <br>
-                可传入关键值：<input type="text" v-model="selected.keyValue">
+                <div class="input-lable">
+                    <p class="input-key">接口ID：</p><p class="input-value">{{selected.id}}</p>
+                </div>
+                <div class="input-lable">
+                    <p class="input-key">接口地址：</p><input type="text" class="input-port" v-model="selected.port"/>
+                </div>
+                <div class="input-lable">
+                    <p class="input-key">接口S Q L：</p><input type="text" class="input-sql"  v-model="selected.sql"></textarea>
+                </div>
+                <div class="input-lable">
+                    <p class="input-key">可传入关键值：</p><input type="text" class="input-keys" v-model="selected.keyValue">
+                </div>
+                <div class="input-lable">
+                    <p class="input-key">分页确认：</p><input type="radio" value=true name="lflag" v-model="selected.limit_flag"><input type="radio" value=false name="lflag" v-model="selected.limit_flag">
+                </div>
+                <div class="input-lable">
+                    <p class="input-key">介绍：</p><input type="text" class="input-keys" v-model="selected.description">
+                </div>
             </div>
         </div>
     </div>
@@ -109,11 +60,46 @@
             methods:{
                 onSelect : function (e) {
                     this.selected = this.data[e-1];
+                },
+                add : function () {
+                    let len = this.data.length+1;
+                    let item = {
+                        "id": len,
+                        "port": "/",
+                        "sql": "",
+                        "keyValue": "",
+                        "limit_flag": false,
+                        "description":""
+                    }
+                    this.data = [...this.data,item]
+                },
+                delt : function () {
+                    let len = this.data.length;
+                    let deitem = this.selected.id;
+                    if(len === deitem){
+                        let data = this.data;
+                        data.pop();
+                        this.data = data;
+                    }else{
+                        let data = this.data;
+                        data = data.filter(item => item.id !== deitem);
+                        for(let i = deitem-1;i<data.length;i++){
+                            data[i].id = data[i].id - 1;
+                        }
+                        this.data = data;
+                    }
+                },
+                save : async function () {
+                    let data = this.data;
+                    let str = JSON.stringify(data)
+                    let string = "/setjson?data=" + str
+                    await fetch(string);
                 }
+
             },
             created:async function(){
                 // fetch('./config.json').then((response) => response.json()).then((json)=>this.data=json.apis)
-                await fetch('./getapilist').then((response) => response.json()).then((json)=>this.data=json)
+                await fetch('/getapilist').then((response) => response.json()).then((json)=>this.data=json)
                 this.selected = this.data[0]
             }
         })
