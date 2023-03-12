@@ -5,14 +5,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
 
-//getHTML page -- outmoded
-/*
-const __fileName = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__fileName);
-const html1 = path.join(__dirname,'./src/index.html');
-*/
-
-
 //getHTML path
 const __pathName = fileURLToPath(import.meta.url)
 const __dir2name = path.dirname(__pathName);
