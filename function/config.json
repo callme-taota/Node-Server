@@ -1,27 +1,35 @@
 {
-    "dataBase": {
-        "user": "root",
-        "password": "Mysqlroot",
-        "database": "myGrade",
-        "Eligibility": true
-    },
-    "port": 8081,
-    "apis": [
-        {
-            "id": 1,
-            "port": "/getClass",
-            "sql": "select * from classes",
-            "keyValue": "",
-            "limit_flag": false,
-            "description":""
-        },
-        {
-            "id": 2,
-            "port": "/getStudent",
-            "sql": "select * from students",
-            "keyValue": "studentid",
-            "limit_flag": true,
-            "description":""
-        }
-    ]
+	"dataBase": {
+		"user": "root",
+		"password": "Mysqlroot",
+		"database": "myGrade",
+		"Eligibility": true
+	},
+	"port": 8081,
+	"apis": [
+		{
+			"id": 1,
+			"port": "/getClass",
+			"sql": "select * from classes",
+			"keyValue": "",
+			"limit_flag": false,
+			"description": ""
+		},
+		{
+			"id": 2,
+			"port": "/getStudent",
+			"sql": "select * from students",
+			"keyValue": "studentid",
+			"limit_flag": true,
+			"description": ""
+		},
+		{
+			"id": 3,
+			"port": "/getTeachers",
+			"sql": "select * from teachers",
+			"keyValue": "teacherid",
+			"limit_flag": "true",
+			"description": ""
+		}
+	]
 }

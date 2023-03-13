@@ -7,9 +7,9 @@ import mysql from 'mysql';
 const __fileName = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__fileName);
 const dir = path.join(__dirname,'/config.json');
+var flag = -1;
 
-
-const ReadConfig = () => {
+export const ReadConfig = () => {
     var json = fs.readFileSync(dir, 'utf8',function(err,data){
         if(err){
             console.error(err);
@@ -51,7 +51,14 @@ const CheckData = (data) => {
         con.connect((err)=>{
             if(err){
                 console.error("数据库信息有误");
-                SetConfig(data);
+                flag ++;
+                console.log(flag)
+                if(flag<2){
+                    SetConfig(data);
+                }else{
+                    return false;
+
+                }
             }else{
                 if(data.Eligibility==false){
                     data.Eligibility=true;

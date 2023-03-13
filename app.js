@@ -49,7 +49,8 @@ if(flag){
     
     app.get('/setjson',(req,res) => {
         let data = JSON.parse(req.query.data)
-        //!!! TODO 
+        //!!! TODO
+        Sys.SetAPISettings(data);
         res.send("OK");
     })
 
@@ -68,8 +69,10 @@ if(flag){
             if(query.length > 1 || JSON.stringify(req.query)!=="{}"){
                 str = " where "
                 for(let j=0; j<query.length; j++) {
-                    if(req.query[query[j]]){
-                        str += query[j]+ "="+ req.query[query[j]] + ' ';
+                    if(req.query[query[j]] && req.query[query[j]][0] === `"`){
+                        str += query[j]+ `=`+ req.query[query[j]] + ' ';
+                    }else if(req.query[query[j]]){
+                        str += query[j]+ `="`+ req.query[query[j]] + '" ';
                     }
                 }
                 if(req.query.limit && !req.query.offset){

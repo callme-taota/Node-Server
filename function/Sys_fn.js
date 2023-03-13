@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { ReadConfig } from './AccessDataBase.js'; 
 
 const __fileName = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__fileName);
@@ -64,6 +65,13 @@ export class Sys{
         }else{
             return true;
         }
+    }
+
+    static SetAPISettings(s){
+        let rs = JSON.parse(ReadConfig());
+        rs.apis = s;
+        let wrs = JSON.stringify(rs,"","\t");
+        fs.writeFile(dir,wrs,'utf8',err=>{});
     }
 
     static getDBConfig(){
