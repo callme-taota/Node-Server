@@ -102,35 +102,3 @@ export const Dosql = async (sql) => {
         con.end(function(err){});
     })
 }
-
-// var con =mysql .createConnection({
-//     host:"localhost",
-//     user:"root",
-//     password:"Mysqlroot",
-//     database:"mysqlbase"
-// })
-
-// con.connect(function(err){
-//     if(!err){
-//         console.log("连接成功")
-//     }else{
-//         console.log("连接错误",err)
-//     }
-// })
-
-// con.query('select * from classes',function (err,result){
-//     if(!err){
-//         for(let i= 0;i<=result.length;i++){
-//             obj.push(result[i])
-//         }
-//     }else{
-//         console.error("数据操作错误")
-//     }
-// })
-
-
-// con.end(function(err){
-//     if(!err){
-//         console.log("断开成功")
-//     }
-// })
