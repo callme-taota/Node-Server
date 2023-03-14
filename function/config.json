@@ -30,6 +30,17 @@
 			"keyValue": "teacherid",
 			"limit_flag": "true",
 			"description": ""
+		},
+		{
+			"id": 4,
+			"port": "/getb",
+			"sql": "select * from students",
+			"keyValue": "",
+			"limit_flag": false,
+			"description": ""
 		}
-	]
+	],
+	"starttime": 0,
+	"updatetime": 1678764653185,
+	"statrtime": 1678764653185
 }

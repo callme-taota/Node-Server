@@ -87,4 +87,32 @@ export class Sys{
         return json;
     }
 
+    static SetStartTime(){
+        let time = Date.now();
+        let rs = JSON.parse(ReadConfig())
+        rs.statrtime = time ;
+        rs.updatetime = time ; 
+        let wrs = JSON.stringify(rs,"","\t");
+        fs.writeFile(dir,wrs,"utf8",err=>{})
+    }
+
+    static UpdateTime(){
+        let time = Date.now() ;
+        let rs = JSON.parse(ReadConfig());
+        rs.updatetime = time ;
+        let wrs = JSON.stringify(rs,"","\t");
+        fs.writeFile(dir,wrs,"utf8",err=>{})
+    }
+
+    static CheckUpdate(){
+        let rs = JSON.parse(ReadConfig())
+        let stime = rs.statrtime;
+        let utime = rs.updatetime;
+        if(stime!==utime){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 }

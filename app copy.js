@@ -5,13 +5,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
 
-//getHTML page -- outmoded
-/*
-const __fileName = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__fileName);
-const html1 = path.join(__dirname,'./src/index.html');
-*/
-
 //getHTML path
 const __pathName = fileURLToPath(import.meta.url)
 const __dir2name = path.dirname(__pathName);
@@ -54,6 +47,12 @@ if(flag){
     })
     app.use(express.static(rp))
     
+    app.get('/setjson',(req,res) => {
+        let data = JSON.parse(req.query.data)
+        //!!! TODO
+        Sys.SetAPISettings(data);
+        res.send("OK");
+    })
 
     for(let i = 0; i <API.length; i++) {
         let port = API[i].port;
@@ -70,8 +69,10 @@ if(flag){
             if(query.length > 1 || JSON.stringify(req.query)!=="{}"){
                 str = " where "
                 for(let j=0; j<query.length; j++) {
-                    if(req.query[query[j]]){
-                        str += query[j]+ "="+ req.query[query[j]] + ' ';
+                    if(req.query[query[j]] && req.query[query[j]][0] === `"`){
+                        str += query[j]+ `=`+ req.query[query[j]] + ' ';
+                    }else if(req.query[query[j]]){
+                        str += query[j]+ `="`+ req.query[query[j]] + '" ';
                     }
                 }
                 if(req.query.limit && !req.query.offset){
