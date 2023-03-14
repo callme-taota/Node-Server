@@ -1,6 +1,6 @@
 import express from 'express';
 import { TryAccess } from './function/AccessDataBase.js';
-import { Sys } from './function/Sys_fn.js';
+import { File } from './function/File.js';
 import cors from 'cors';
 import { StartServer,Router } from './function/Server.js';
 
@@ -9,7 +9,7 @@ export function Server(f){
         StartServer();
         app.use('/',Router);
         setTimeout(() => {
-            Sys.SetStartTime();
+            File.SetTime();
         }, 50);
     }else{
         StartServer();
@@ -18,7 +18,7 @@ export function Server(f){
 }
 
 //get Server port
-const port = Sys.getPort();
+const port = File.getPort();
 //start app
 const app = express();
 //solve cross
@@ -28,10 +28,10 @@ app.use(cors());
 TryAccess();
 
 
-let flag = Sys.CheckApi();
+let flag = File.CheckAPI();
 
 if(flag){
-    Sys.SetStartTime();
+    File.SetTime();
 
     Server(false);
 

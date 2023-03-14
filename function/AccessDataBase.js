@@ -2,21 +2,16 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { Sys } from './Sys_fn.js';
+import { File } from './File.js';
 import mysql from 'mysql';
 
-const __fileName = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__fileName);
-const dir = path.join(__dirname,'/config.json');
+// const __fileName = fileURLToPath(import.meta.url)
+// const __dirname = path.dirname(__fileName);
+// const dir = path.join(__dirname,'/config.json');
 var flag = -1;
 
 export const ReadConfig = () => {
-    var json = fs.readFileSync(dir, 'utf8',function(err,data){
-        if(err){
-            console.error(err);
-            return;
-        }
-        json = JSON.parse(data);
-    })
+    let json = File._readFile();
     return json;
 }
 
@@ -76,7 +71,7 @@ const CheckData = (data) => {
 }
 
 export const TryAccess = () => {
-    let data = JSON.parse(ReadConfig());
+    let data = ReadConfig();
     let config = data.dataBase;
     SetConfig(config);
 }

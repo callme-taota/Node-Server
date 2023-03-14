@@ -1,8 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import fs from 'fs';
-import { Sys } from './Sys_fn.js';
+import { File } from './File.js';
 import { Dosql } from './AccessDataBase.js';
 import { Server } from '../app.js';
 
@@ -12,25 +11,22 @@ const __pathName = fileURLToPath(import.meta.url)
 const __dir2name = path.dirname(__pathName);
 const rp = path.join(__dir2name,'../src');
 
-const __fileName = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__fileName)
-const jsonfile = path.join(__dirname,'./config.json')
-
 //get api list    
-let API = Sys.getAPIconfig();
+let API = File.getAPIconfig();
 
 export function StartServer(){
 
     Router.get('/getapilist',(req,res) => {
-        res.send(Sys.getAPIconfig());
+        res.send(File.getAPIconfig());
     })
+    
     Router.use(express.static(rp))
     
     Router.get('/setjson',(req,res) => {
         let data = JSON.parse(req.query.data)
-        Sys.UpdateTime();
+        File.SetTime();
         setTimeout(() => {
-            Sys.SetAPISettings(data);
+            File.SetAPIconfig(data);
             res.send("OK");
             Server(true);
         },200);
