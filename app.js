@@ -4,12 +4,10 @@ import { Sys } from './function/Sys_fn.js';
 import cors from 'cors';
 import { StartServer,Router } from './function/Server.js';
 
-
 export function Server(f){
     if(f){
         StartServer();
         app.use('/',Router);
-        console.log(Router)
         setTimeout(() => {
             Sys.SetStartTime();
         }, 50);
@@ -29,12 +27,8 @@ app.use(cors());
 //check mysql connection
 TryAccess();
 
-//get api list
-let API = Sys.getAPIconfig();
-//api validity check
-let flag = Sys.CheckApi(API);
 
-
+let flag = Sys.CheckApi();
 
 if(flag){
     Sys.SetStartTime();

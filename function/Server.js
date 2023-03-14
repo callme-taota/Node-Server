@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 import { Sys } from './Sys_fn.js';
 import { Dosql } from './AccessDataBase.js';
 import { Server } from '../app.js';
@@ -15,16 +16,13 @@ const __fileName = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__fileName)
 const jsonfile = path.join(__dirname,'./config.json')
 
-//get api list
+//get api list    
 let API = Sys.getAPIconfig();
 
 export function StartServer(){
-    
-    Router.get('/config.json',(req,res) => {
-        res.sendFile(jsonfile)
-    })
+
     Router.get('/getapilist',(req,res) => {
-        res.send(API)
+        res.send(Sys.getAPIconfig());
     })
     Router.use(express.static(rp))
     

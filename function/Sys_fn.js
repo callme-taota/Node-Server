@@ -7,7 +7,6 @@ const __fileName = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__fileName);
 const dir = path.join(__dirname,'/config.json');
 
-
 export class Sys{
     static _readlineSync() {
         return new Promise((resolve, reject) => {
@@ -44,14 +43,34 @@ export class Sys{
                 console.error(err);
                 return;
             }else{
-                json = JSON.parse(data);
+                json = JSON.parse(decodeURIComponent(data));
             }
         })
-        json = JSON.parse(json)
+        json = JSON.parse(decodeURIComponent(json))
         return json.apis;
     }
 
-    static CheckApi(arr){
+    static async getAPIconfigSync(){
+        return new Promise(function(resolve, reject){
+            setTimeout(() => {
+                let api = this.getAPIconfig();
+                resolve(api);  
+            }, 100);
+            
+        });
+    }
+
+    static CheckApi(){
+        var json = fs.readFileSync(dir,'utf8',function(err,data){
+            if(err){
+                console.error(err);
+                return;
+            }else{
+                json = JSON.parse(data);
+            }
+        })
+        json = JSON.parse(json);
+        let arr = json.apis;
         let id_arr =  [];
         let port_arr = [];
         for(let i = 0; i < arr.length; i++){
