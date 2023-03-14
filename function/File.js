@@ -18,7 +18,6 @@ export class File{
             }
         })
         json = JSON.parse(json);
-        console.log(json);
         return json;
     }
 

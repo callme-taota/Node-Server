@@ -8,9 +8,6 @@ export function Server(f){
     if(f){
         StartServer();
         app.use('/',Router);
-        setTimeout(() => {
-            File.SetTime();
-        }, 50);
     }else{
         StartServer();
         app.use('/',Router);
@@ -32,8 +29,12 @@ let flag = File.CheckAPI();
 
 if(flag){
     File.SetTime();
-
-    Server(false);
+    console.log("Starting Setver");
+    setTimeout(() => {
+        Server(false);
+        console.log("Start success")
+    }, 1000);
+    
 
     app.listen(port,()=>{})
 }else{

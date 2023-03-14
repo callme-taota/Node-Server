@@ -78,7 +78,7 @@ export const TryAccess = () => {
 
 export const Dosql = async (sql) => {
     return new Promise((resolve, reject) => {
-        let data = JSON.parse(ReadConfig());
+        let data = ReadConfig();
         let config = data.dataBase;
         var con = mysql.createConnection({
             host:"localhost",

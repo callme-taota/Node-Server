@@ -11,25 +11,23 @@ const __pathName = fileURLToPath(import.meta.url)
 const __dir2name = path.dirname(__pathName);
 const rp = path.join(__dir2name,'../src');
 
-//get api list    
-let API = File.getAPIconfig();
 
 export function StartServer(){
-
+    
+    let API = File.getAPIconfig();
     Router.get('/getapilist',(req,res) => {
         res.send(File.getAPIconfig());
     })
-    
+
     Router.use(express.static(rp))
     
     Router.get('/setjson',(req,res) => {
         let data = JSON.parse(req.query.data)
-        File.SetTime();
+        File.SetAPIconfig(data);
+        res.send("OK");
         setTimeout(() => {
-            File.SetAPIconfig(data);
-            res.send("OK");
-            Server(true);
-        },200);
+            StartServer();
+        }, 1000);
     })
 
     for(let i = 0; i <API.length; i++) {
