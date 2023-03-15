@@ -30,8 +30,16 @@
 			"keyValue": "teacherid",
 			"limit_flag": "true",
 			"description": ""
+		},
+		{
+			"id": 4,
+			"port": "/geta",
+			"sql": "select * from classes",
+			"keyValue": "",
+			"limit_flag": false,
+			"description": ""
 		}
 	],
-	"starttime": 1678866512735,
-	"updatetime": 1678866512735
+	"starttime": 1678867723257,
+	"updatetime": 1678867723257
 }

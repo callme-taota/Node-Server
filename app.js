@@ -4,14 +4,9 @@ import { File } from './function/File.js';
 import cors from 'cors';
 import { StartServer,Router } from './function/Server.js';
 
-export function Server(f){
-    if(f){
-        StartServer();
-        app.use('/',Router);
-    }else{
-        StartServer();
-        app.use('/',Router);
-    }
+export function Server(){
+    StartServer();
+    app.use('/',Router);
 }
 
 //get Server port
@@ -31,7 +26,7 @@ if(flag){
     File.SetTime();
     console.log("Starting Setver");
     setTimeout(() => {
-        Server(false);
+        Server();
         console.log("Start success")
     }, 1000);
     

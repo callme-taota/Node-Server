@@ -2,7 +2,6 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { File } from './File.js';
-import { Dosql } from './AccessDataBase.js';
 import { RR } from './ResolveRequest.js';
 
 export const Router =express.Router();
@@ -22,12 +21,14 @@ export function StartServer(){
     Router.use(express.static(rp))
     
     Router.get('/setjson',(req,res) => {
+        console.log("Updating...")
         let data = JSON.parse(req.query.data)
-        File.SetAPIconfig(data);
-        res.send("OK");
+        let obj = File.SetAPIconfig(data);
+        res.send(obj);
         setTimeout(() => {
             StartServer();
         }, 1000);
+        console.log("Update Successful")
     })
 
     for(let i = 0; i <API.length; i++) {

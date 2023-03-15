@@ -92,8 +92,21 @@ export class File{
 
     static SetAPIconfig(s){
         let json = this._readFile();
+        let oldapi = json.apis;
+        let ol = oldapi.length;
+        let nl = s.length;
+        let state = "";
+        if(ol>nl){
+            state="delect";
+        }else if(ol==nl){
+            state="update";
+        }else{
+            state="add";
+        }
+        let obj={oldapi,state};
         json.apis = s;
         this._setFile(json);
+        return obj;
     }
 
 
