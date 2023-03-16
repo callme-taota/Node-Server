@@ -26,6 +26,7 @@ export class File{
         fs.writeFile(jsonfile,wrs,"utf8",err=>{})
     }
 
+    
     static getPort(){
         let json = this._readFile();
         return json.port;

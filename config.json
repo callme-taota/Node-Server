@@ -1,8 +1,8 @@
 {
 	"dataBase": {
 		"user": "root",
-		"password": "sql2008",
-		"database": "mysales",
+		"password": "Mysqlroot",
+		"database": "mygrade",
 		"Eligibility": true
 	},
 	"port": 8081,
@@ -16,6 +16,6 @@
 			"description": ""
 		}
 	],
-	"starttime": 1678960434191,
-	"updatetime": 1678960434191
+	"starttime": 1678977940707,
+	"updatetime": 1678977940707
 }

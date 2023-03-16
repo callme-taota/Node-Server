@@ -28,9 +28,10 @@ if(flag){
     console.log("Starting Setver");
     setTimeout(() => {
         Server();
-        console.log("Start success")
-        let s = "start http://localhost:" + port + "/";
-        exec(s)
+        let s = "http://localhost:" + port + "/";
+        let ss = "start " + s
+        console.log("Start success at",s)
+        exec(ss)
     }, 1000);
     
 
