@@ -38,14 +38,14 @@ const SetConfig = async (data) => {
 const CheckData = (data) => {
     if(data.user!=="" && data.password !=="" && data.dataBased !==""){
         var con = mysql.createConnection({
-            host: "localhost",
+            host: "127.0.0.1",
             user: data.user,
             password: data.password,
             database: data.database,
         })
         con.connect((err)=>{
             if(err){
-                console.error("数据库信息有误");
+                console.error("数据库信息有误",err);
                 flag ++;
                 console.log(flag)
                 if(flag<2){
@@ -81,7 +81,7 @@ export const Dosql = async (sql) => {
         let data = ReadConfig();
         let config = data.dataBase;
         var con = mysql.createConnection({
-            host:"localhost",
+            host:"127.0.0.1",
             user:config.user,
             password:config.password,
             database:config.database

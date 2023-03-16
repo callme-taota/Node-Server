@@ -35,7 +35,7 @@ export async function RR(p,req){
             }
             if(req.query.limit && req.query.offset){
                 limit += ' limit '
-                limit += (parseInt(req.query.offset)+1) + " , " + (parseInt(req.query.limit)+parseInt(req.query.offset) )
+                limit += (parseInt(req.query.offset)) + " , " + (parseInt(req.query.limit))
             }
         }
     
