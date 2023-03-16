@@ -3,6 +3,7 @@ import { TryAccess } from './function/AccessDataBase.js';
 import { File } from './function/File.js';
 import cors from 'cors';
 import { StartServer,Router } from './function/Server.js';
+import { exec } from 'child_process';
 
 export function Server(){
     StartServer();
@@ -28,6 +29,8 @@ if(flag){
     setTimeout(() => {
         Server();
         console.log("Start success")
+        let s = "start http://localhost:" + port + "/";
+        exec(s)
     }, 1000);
     
 
