@@ -1,21 +1,13 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { Sys } from './Sys_fn.js';
 import { File } from './File.js';
 import mysql from 'mysql';
 
-// const __fileName = fileURLToPath(import.meta.url)
-// const __dirname = path.dirname(__fileName);
-// const dir = path.join(__dirname,'/config.json');
 var flag = -1;
 
 export const ReadConfig = () => {
     let json = File._readFile();
     return json;
 }
-
-
 
 const SetConfig = async (data) => {
     if(data.Eligibility === false ){
