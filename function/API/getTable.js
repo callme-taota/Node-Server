@@ -1,16 +1,10 @@
-import mysql from 'mysql';
-import { Sys } from '../Sys_fn.js';
 import { Dosql } from '../AccessDataBase.js';
+import { Container } from "./Container.js";
 
-export async function getTable(tablename){
-    let obj = {
-        result:null,
-        code : 200,
-        length: 0,
-    }
-    let sql = "select * from " + tablename
-    let res = await Dosql(sql)
-    obj.result = res
-    obj.length = res.length
-    return obj
-}
+export const GetTable =new Container("/getTable",async (n)=>{
+    let name = n.name;
+    let sql = "select * from "+name ;
+    console.log(sql)
+    let res = await Dosql(sql);
+    return res;
+});

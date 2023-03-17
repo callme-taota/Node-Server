@@ -4,7 +4,7 @@ import { File } from './function/File.js';
 import cors from 'cors';
 import { StartServer,Router } from './function/Server.js';
 import { exec } from 'child_process';
-
+import { SuperRouter } from './function/API/Pool.js';
 export function Server(){
     StartServer();
     app.use('/',Router);
@@ -34,6 +34,7 @@ if(flag){
         exec(ss)
     }, 1000);
     
+    app.use("/",SuperRouter);
 
     app.listen(port,()=>{})
 }else{
