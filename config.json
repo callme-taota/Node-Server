@@ -14,8 +14,16 @@
 			"keyValue": "productid",
 			"limit_flag": true,
 			"description": ""
+		},
+		{
+			"id": 2,
+			"port": "/getstudents",
+			"sql": "select * from students",
+			"keyValue": "studentid;province",
+			"limit_flag": "true",
+			"description": ""
 		}
 	],
-	"starttime": 1678977940707,
-	"updatetime": 1678977940707
+	"starttime": 1679058696671,
+	"updatetime": 1679058696671
 }

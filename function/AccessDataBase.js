@@ -29,13 +29,13 @@ const SetConfig = async (data) => {
             "database" :database,
             "Eligibility":false
         }
-        CheckData(dataBase);
+        await CheckData(dataBase);
     }else{
-        CheckData(data);
+        await CheckData(data);
     }
 }
 
-const CheckData = (data) => {
+const CheckData = async (data) => {
     if(data.user!=="" && data.password !=="" && data.dataBased !==""){
         var con = mysql.createConnection({
             host: "127.0.0.1",
@@ -52,17 +52,17 @@ const CheckData = (data) => {
                     SetConfig(data);
                 }else{
                     return false;
-
                 }
             }else{
                 if(data.Eligibility==false){
                     data.Eligibility=true;
-                    let rs = JSON.parse(ReadConfig());
+                    let rs = ReadConfig();
                     rs.dataBase = data;
-                    let wrs = JSON.stringify(rs);
-                    fs.writeFile(dir,wrs,'utf8',(err)=>{});        
+                    File._setFile(rs);
+                    return true;
                 }else{
-                    console.log("数据库连接成功")
+                    console.log("数据库连接成功");
+                    return true;
                 }
             }
         })
@@ -70,10 +70,10 @@ const CheckData = (data) => {
     }
 }
 
-export const TryAccess = () => {
+export const TryAccess = async () => {
     let data = ReadConfig();
     let config = data.dataBase;
-    SetConfig(config);
+    await SetConfig(config);
 }
 
 export const Dosql = async (sql) => {

@@ -18,7 +18,7 @@ const app = express();
 app.use(cors());
 
 //check mysql connection
-TryAccess();
+await TryAccess();
 
 
 let flag = File.CheckAPI();

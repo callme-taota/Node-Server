@@ -19,7 +19,7 @@ export async function RR(p,req){
         if(a[t].keyValue!=="" || a[t].keyValue!==null){
             query = a[t].keyValue.split(";");
         }
-    
+        
         if(query.length > 1 || JSON.stringify(req.query)!=="{}"){
             str = " where "
             for(let j=0; j<query.length; j++) {
