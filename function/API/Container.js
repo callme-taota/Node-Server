@@ -3,11 +3,8 @@ export class Container{
         this.p = p;
         this.f = f;
     }
-    setQuery(query){
-        this.query = query;
-    }
-    getRes(){
-        let res = this.f(this.query);
+    getRes(q){
+        let res = this.f(q);
         return res;
     }
     getPort(){
